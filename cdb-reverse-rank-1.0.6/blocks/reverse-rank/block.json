@@ -1,0 +1,27 @@
+{
+  "apiVersion": 2,
+  "name": "cdb/reverse-rank",
+  "title": "CDB 逆アクセスランキング",
+  "category": "widgets",
+  "icon": "chart-bar",
+  "description": "期間別・種別の逆アクセスランキングを表示します。",
+  "attributes": {
+    "range": {
+      "type": "string",
+      "default": "7d"
+    },
+    "type": {
+      "type": "string",
+      "default": "domain"
+    },
+    "limit": {
+      "type": "number",
+      "default": 50
+    }
+  },
+  "editorScript": "cdb-rr-block",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false
+  }
+}

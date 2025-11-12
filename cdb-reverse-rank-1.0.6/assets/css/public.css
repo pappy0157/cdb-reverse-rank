@@ -1,0 +1,126 @@
+/* CDB Reverse Rank modern styles (responsive & labeled) */
+.cdb-ref-card {
+  --cdb-surface: #0f1620;
+  --cdb-border: #1d2836;
+  --cdb-text: #e6eef7;
+  --cdb-muted: #a9b6c6;
+  background: var(--cdb-surface);
+  color: var(--cdb-text);
+  border: 1px solid var(--cdb-border);          /* ← 枠線復活 */
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.25);
+  overflow: hidden;
+  margin: 8px 0 18px;
+}
+
+.cdb-ref-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 16px;
+  background: linear-gradient(180deg, rgba(78,168,255,.12), rgba(78,168,255,0));
+  border-bottom:1px solid var(--cdb-border);     /* ← ヘッダ下のボーダー */
+  gap:12px; flex-wrap:wrap;
+}
+.cdb-ref-title { font-weight:700; letter-spacing:.2px; font-size:16px; }
+
+.cdb-ref-controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.cdb-ref-controls label { font-size:12px; color: var(--cdb-muted); display:flex; gap:6px; align-items:center; }
+.cdb-ref-controls select,
+.cdb-ref-controls input,
+.cdb-ref-controls button {
+  background:#0d141d; color:var(--cdb-text); border:1px solid var(--cdb-border);
+  border-radius:10px; padding:8px 10px; font-size:13px;
+}
+.cdb-ref-controls button { cursor:pointer; }
+
+.cdb-ref-table { width:100%; border-collapse:separate; border-spacing:0; }
+.cdb-ref-table thead th {
+  text-align:left; font-size:12px; letter-spacing:.2px; text-transform:uppercase;
+  color:var(--cdb-muted); padding:10px 14px;
+  border-bottom:1px solid var(--cdb-border);   /* ← 見出しボーダー */
+  white-space:nowrap;
+}
+.cdb-ref-table tbody td {
+  padding:14px;
+  border-bottom:1px solid var(--cdb-border);   /* ← 行ボーダー復活（PC） */
+}
+.cdb-ref-table tbody tr:hover { background: rgba(78,168,255,.06); }
+
+.cdb-rank-badge {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:50%;
+  background:#0d141d; border:1px solid var(--cdb-border);
+  font-weight:700; color:var(--cdb-muted); margin-right:10px; flex:0 0 auto;
+}
+.cdb-top-1 .cdb-rank-badge { background:linear-gradient(135deg,#ffd54d,#ffb300); color:#111; border:none; }
+.cdb-top-2 .cdb-rank-badge { background:linear-gradient(135deg,#e5e7eb,#c7c9cf); color:#111; border:none; }
+.cdb-top-3 .cdb-rank-badge { background:linear-gradient(135deg,#f6ad55,#ed8936); color:#111; border:none; }
+.cdb-top-4 .cdb-rank-badge, .cdb-top-5 .cdb-rank-badge { background:#13202e; color:#9cc2ff; }
+
+.cdb-top-1 .cdb-label a, .cdb-top-1 .cdb-label { font-size:16px; font-weight:800; }
+.cdb-top-2 .cdb-label a, .cdb-top-2 .cdb-label { font-size:15px; font-weight:800; }
+.cdb-top-3 .cdb-label a, .cdb-top-3 .cdb-label { font-size:15px; font-weight:700; }
+.cdb-top-4 .cdb-label a, .cdb-top-4 .cdb-label,
+.cdb-top-5 .cdb-label a, .cdb-top-5 .cdb-label { font-weight:700; }
+
+.cdb-partner-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 8px; border-radius:999px; font-size:12px;
+  background:rgba(34,197,94,.12); color:#34d399; border:1px solid rgba(34,197,94,.25);
+  margin-left:8px;
+}
+.cdb-count { text-align:right; font-variant-numeric: tabular-nums; white-space:nowrap; color:#00a743 !important;}
+.cdb-lastseen { color:var(--cdb-muted); font-size:13px; white-space:nowrap; }
+
+/* ====== モバイル最適化（<= 640px）====== */
+@media (max-width: 640px) {
+  .cdb-ref-controls { width:100%; }
+  .cdb-ref-controls label { width:calc(50% - 6px); }
+  .cdb-ref-controls input[type="number"] { width:100%; }
+  .cdb-ref-controls button { width:100%; }
+
+  /* 見出しは隠し、各セルにラベルを追加表示 */
+  .cdb-ref-table thead { display:none; }
+
+  .cdb-ref-table tbody tr {
+    display:block;
+    border-top:1px solid var(--cdb-border);     /* ← 行の上ボーダー（カード化） */
+    border-bottom:1px solid var(--cdb-border);  /* ← 行の下ボーダー */
+    margin:8px 0;
+    padding:4px 0;
+    background: transparent;
+  }
+
+  .cdb-ref-table tbody td {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 14px;
+    border-bottom:1px dashed var(--cdb-border); /* ← セル間ボーダー（モバイル） */
+  }
+  .cdb-ref-table tbody td:last-child {
+    border-bottom:none;                          /* 最後はボーダー無し */
+  }
+
+  /* 各セル左にラベルを表示（data-label を使用） */
+  .cdb-ref-table tbody td::before {
+    content: attr(data-label);
+    color: var(--cdb-muted);
+    font-size:12px;
+    margin-right:12px;
+    flex: 1 1 auto;
+    text-align:left;
+  }
+
+  /* 値側は右寄せ（参照元は左寄せのまま） */
+  .cdb-ref-table tbody td[data-col="count"],
+  .cdb-ref-table tbody td[data-col="lastseen"] {
+    justify-content: flex-end;
+  }
+  .cdb-ref-table tbody td[data-col="label"] {
+    justify-content: flex-start;
+  }
+}
+
+
+/* CDB Credit badge (required) */
+.cdb-rr-credit{position:fixed;right:10px;bottom:10px;background:#111;color:#fff;font-size:12px;line-height:1;border-radius:999px;padding:8px 12px;box-shadow:0 2px 10px rgba(0,0,0,.2);z-index:99999;opacity:.92}
+.cdb-rr-credit a{color:#fff;text-decoration:none;font-weight:600}
+.cdb-rr-locked{padding:16px;border:1px dashed #e00;background:#fff5f5;color:#c00;border-radius:8px}
